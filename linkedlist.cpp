@@ -1,55 +1,61 @@
-#include<bits/stdc++.h>
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 using namespace std;
-
-class Node
-{
-public:
+struct node{
     int data;
-    Node *next;
-
-
-    Node(int data1,Node *next1)
-{
-   data=data1;
-   next=next1;
-
-}
-    Node(int data1)
-    {
-        data=data1;
-        next=nullptr;
-    }
+    struct node *next;
 
 };
 
-//function to print the linked list
-void printLL(Node* head)//traversal
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+int n;
+int x;
+int cnt=0;
+
+cin>>n;
+
+struct node *head=NULL;
+for(int i=0;i<n;i++)
 {
-    while(head!=NULL)
+    if(head==NULL)
     {
-        cout<<head->data<<" ";
-        head=head->next;
+        struct node *temp=new node();
+        cin>>x;
+        temp->data=x;
+        temp->next=NULL;
+        head=temp;
     }
+    else
+    {
+        struct node *ptr=head;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+
+        }
+        struct node *temp=new node();
+        cin>>x;
+        temp->data=x;
+        temp->next=NULL;
+        ptr->next=temp;
+    }
+
 }
-Node *insertHead(Node* head,int val)
-{
-    Node* temp=new Node (val,head);
-    return temp;
-}
-
-int main()
-{
-    vector<int> arr={12,8,5,7};
-    int val=100;
-
-    Node *head=new Node(arr[0]);
-    head->next=new Node (arr[1]);
-    head->next->next=new Node (arr[2]);
-    head->next->next->next=new Node (arr[3]);
-
-    head=insertHead(head,val);
-    printLL(head);
+    struct node *ptr=head;
+    // ptr=ptr->next;
+    while(ptr->next!=NULL)
+    {
+        if(ptr->data < ptr->next->data && ptr->next->data > ptr->next->next->data)
+        {
+            cnt+=1;
+        }
+        ptr=ptr->next;
+    }
+    cout<<cnt;
     return 0;
 }
-
-
